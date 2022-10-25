@@ -1,4 +1,4 @@
-package com.fk.photogallery.core.net
+package com.fk.photogallery.core.utils.net
 
 import android.util.Log
 import com.alibaba.fastjson.JSON
@@ -12,17 +12,12 @@ object HttpUtil {
     private var okHttpClient: OkHttpClient? = null
 
     init {
-        initClient()
-    }
-
-    private fun initClient() {
         okHttpClient = OkHttpClient.Builder()
             .connectTimeout(15, TimeUnit.SECONDS)
             .writeTimeout(30, TimeUnit.SECONDS)
             .readTimeout(30, TimeUnit.SECONDS)
             .retryOnConnectionFailure(true).build()
     }
-
 
     fun <T> get(clazz: Class<T>, url: String, callBack: RequestDataCallBack<T>) {
         val request = Request.Builder()

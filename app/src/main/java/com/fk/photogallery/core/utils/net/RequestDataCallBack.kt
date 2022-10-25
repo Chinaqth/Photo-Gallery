@@ -1,4 +1,4 @@
-package com.fk.photogallery.core.net
+package com.fk.photogallery.core.utils.net
 
 interface RequestDataCallBack<T> {
 
