@@ -24,6 +24,5 @@ class MainActivity : AppCompatActivity() {
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .into(iamge)
         }
-
     }
 }
