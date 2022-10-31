@@ -35,7 +35,7 @@ public class PhotoGalleryAdapter extends BaseQuickAdapter<BaseViewHolder> {
             return;
         }
         PhotoItem photoItems = item.getHits().get(position);
-        holder.displayWithUrl(R.id.iv_image, photoItems.getPreviewURL(), R.mipmap.icon_placeholder);
+        holder.displayWithUrl(R.id.iv_image, photoItems.getLargeImageURL(), R.mipmap.icon_placeholder);
     }
 
     @Override
