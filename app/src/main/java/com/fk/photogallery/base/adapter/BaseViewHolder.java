@@ -15,6 +15,7 @@
  */
 package com.fk.photogallery.base.adapter;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Paint;
 import android.graphics.Typeface;
@@ -42,6 +43,8 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.fk.photogallery.core.utils.glide.GlideUtil;
+
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 
@@ -65,6 +68,7 @@ public class BaseViewHolder extends RecyclerView.ViewHolder {
 
     private final LinkedHashSet<Integer> itemChildLongClickViewIds;
     private BaseQuickAdapter adapter;
+    private GlideUtil glideUtil;
 
     /**
      * Package private field to retain the associated user object and detect a change
@@ -77,6 +81,7 @@ public class BaseViewHolder extends RecyclerView.ViewHolder {
         this.views = new SparseArray<>();
         this.childClickViewIds = new LinkedHashSet<>();
         this.itemChildLongClickViewIds = new LinkedHashSet<>();
+        glideUtil = GlideUtil.INSTANCE;
     }
 
     public HashSet<Integer> getItemChildLongClickViewIds() {
@@ -102,6 +107,14 @@ public class BaseViewHolder extends RecyclerView.ViewHolder {
         return this;
     }
 
+    public void displayWithUrl( @IdRes int viewId, String url, int defaultImage) {
+        ImageView view = getView(viewId);
+        if (view != null) {
+            if (glideUtil != null) {
+                glideUtil.disPlayWithUrl(view, url, defaultImage);
+            }
+        }
+    }
 
     public BaseViewHolder setAnsenViewAge(@IdRes int viewId, String age, boolean isMan) {
         TextView view = getView(viewId);
@@ -200,7 +213,6 @@ public class BaseViewHolder extends RecyclerView.ViewHolder {
     }
 
 
-
     /**
      * Will set background color of a view.
      *
@@ -292,21 +304,6 @@ public class BaseViewHolder extends RecyclerView.ViewHolder {
     }
 
     /**
-     * Set a view visibility to VISIBLE (true) or GONE (false).
-     *
-     * @param viewId  The view id.
-     * @param visible True for VISIBLE, false for GONE.
-     * @return The BaseViewHolder for chaining.
-     */
-    public BaseViewHolder setGone(@IdRes int viewId, boolean visible) {
-        View view = getView(viewId);
-        if (view != null) {
-            view.setVisibility(visible ? View.VISIBLE : View.GONE);
-        }
-        return this;
-    }
-
-    /**
      * Set a view visibility to VISIBLE (true) or INVISIBLE (false).
      *
      * @param viewId  The view id.
@@ -326,109 +323,6 @@ public class BaseViewHolder extends RecyclerView.ViewHolder {
         if (view != null) {
             view.setVisibility(visible);
         }
-        return this;
-    }
-
-    /**
-     * Add links into a TextView.
-     *
-     * @param viewId The id of the TextView to linkify.
-     * @return The BaseViewHolder for chaining.
-     */
-    public BaseViewHolder linkify(@IdRes int viewId) {
-        TextView view = getView(viewId);
-        Linkify.addLinks(view, Linkify.ALL);
-        return this;
-    }
-
-    /**
-     * Apply the typeface to the given viewId, and enable subpixel rendering.
-     */
-    public BaseViewHolder setTypeface(@IdRes int viewId, Typeface typeface) {
-        TextView view = getView(viewId);
-        view.setTypeface(typeface);
-        view.setPaintFlags(view.getPaintFlags() | Paint.SUBPIXEL_TEXT_FLAG);
-        return this;
-    }
-
-    /**
-     * Apply the typeface to all the given viewIds, and enable subpixel rendering.
-     */
-    public BaseViewHolder setTypeface(Typeface typeface, int... viewIds) {
-        for (int viewId : viewIds) {
-            TextView view = getView(viewId);
-            view.setTypeface(typeface);
-            view.setPaintFlags(view.getPaintFlags() | Paint.SUBPIXEL_TEXT_FLAG);
-        }
-        return this;
-    }
-
-    /**
-     * Sets the progress of a ProgressBar.
-     *
-     * @param viewId   The view id.
-     * @param progress The progress.
-     * @return The BaseViewHolder for chaining.
-     */
-    public BaseViewHolder setProgress(@IdRes int viewId, int progress) {
-        ProgressBar view = getView(viewId);
-        view.setProgress(progress);
-        return this;
-    }
-
-    /**
-     * Sets the progress and max of a ProgressBar.
-     *
-     * @param viewId   The view id.
-     * @param progress The progress.
-     * @param max      The max value of a ProgressBar.
-     * @return The BaseViewHolder for chaining.
-     */
-    public BaseViewHolder setProgress(@IdRes int viewId, int progress, int max) {
-        ProgressBar view = getView(viewId);
-        view.setMax(max);
-        view.setProgress(progress);
-        return this;
-    }
-
-    /**
-     * Sets the range of a ProgressBar to 0...max.
-     *
-     * @param viewId The view id.
-     * @param max    The max value of a ProgressBar.
-     * @return The BaseViewHolder for chaining.
-     */
-    public BaseViewHolder setMax(@IdRes int viewId, int max) {
-        ProgressBar view = getView(viewId);
-        view.setMax(max);
-        return this;
-    }
-
-    /**
-     * Sets the rating (the number of stars filled) of a RatingBar.
-     *
-     * @param viewId The view id.
-     * @param rating The rating.
-     * @return The BaseViewHolder for chaining.
-     */
-    public BaseViewHolder setRating(@IdRes int viewId, float rating) {
-        RatingBar view = getView(viewId);
-        view.setRating(rating);
-        return this;
-    }
-
-    /**
-     * Sets the rating (the number of stars filled) and max of a RatingBar.
-     *
-     * @param viewId The view id.
-     * @param rating The rating.
-     * @param max    The range of the RatingBar to 0...max.
-     * @return The BaseViewHolder for chaining.
-     */
-    public BaseViewHolder setRating(@IdRes int viewId, float rating, int max) {
-        RatingBar view = getView(viewId);
-        view.setMax(max);
-        view.setRating(rating);
         return this;
     }
 
@@ -464,100 +358,6 @@ public class BaseViewHolder extends RecyclerView.ViewHolder {
         return this;
     }
 
-    /**
-     * Sets the on touch listener of the view.
-     *
-     * @param viewId   The view id.
-     * @param listener The on touch listener;
-     * @return The BaseViewHolder for chaining.
-     */
-    @Deprecated
-    public BaseViewHolder setOnTouchListener(@IdRes int viewId, View.OnTouchListener listener) {
-        View view = getView(viewId);
-        view.setOnTouchListener(listener);
-        return this;
-    }
-
-    /**
-     * Sets the on long click listener of the view.
-     *
-     * @param viewId   The view id.
-     * @param listener The on long click listener;
-     * @return The BaseViewHolder for chaining.
-     * Please use  (adapter.setOnItemChildLongClickListener(listener))}
-     */
-    @Deprecated
-    public BaseViewHolder setOnLongClickListener(@IdRes int viewId, View.OnLongClickListener listener) {
-        View view = getView(viewId);
-        if (view != null) {
-            view.setOnLongClickListener(listener);
-        }
-        return this;
-    }
-
-    public BaseViewHolder setOnLongClickListener(@IdRes int viewId, View.OnLongClickListener listener, Object obj) {
-        View view = getView(viewId);
-        if (view != null) {
-            view.setTag(viewId, obj);
-            view.setOnLongClickListener(listener);
-        }
-        return this;
-    }
-
-    /**
-     * Sets the listview or gridview's item click listener of the view
-     *
-     * @param viewId   The view id.
-     * @param listener The item on click listener;
-     * @return The BaseViewHolder for chaining.
-     * Please use  (adapter.setOnItemChildClickListener(listener))}
-     */
-    @Deprecated
-    public BaseViewHolder setOnItemClickListener(@IdRes int viewId, AdapterView.OnItemClickListener listener) {
-        AdapterView view = getView(viewId);
-        view.setOnItemClickListener(listener);
-        //BeeProbe.instance().disableAccessibility(view);
-        return this;
-    }
-
-    /**
-     * Sets the listview or gridview's item long click listener of the view
-     *
-     * @param viewId   The view id.
-     * @param listener The item long click listener;
-     * @return The BaseViewHolder for chaining.
-     */
-    public BaseViewHolder setOnItemLongClickListener(@IdRes int viewId, AdapterView.OnItemLongClickListener listener) {
-        AdapterView view = getView(viewId);
-        view.setOnItemLongClickListener(listener);
-        return this;
-    }
-
-    /**
-     * Sets the listview or gridview's item selected click listener of the view
-     *
-     * @param viewId   The view id.
-     * @param listener The item selected click listener;
-     * @return The BaseViewHolder for chaining.
-     */
-    public BaseViewHolder setOnItemSelectedClickListener(@IdRes int viewId, AdapterView.OnItemSelectedListener listener) {
-        AdapterView view = getView(viewId);
-        view.setOnItemSelectedListener(listener);
-        return this;
-    }
-
-    /**
-     * Sets the on checked change listener of the view.
-     *
-     * @param viewId   The view id.
-     * @param listener The checked change listener of compound button.
-     * @return The BaseViewHolder for chaining.
-     */
-    public BaseViewHolder setOnCheckedChangeListener(@IdRes int viewId, CompoundButton.OnCheckedChangeListener listener) {
-        CompoundButton view = getView(viewId);
-        view.setOnCheckedChangeListener(listener);
-        return this;
-    }
 
     /**
      * Sets the tag of the view.

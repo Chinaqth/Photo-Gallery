@@ -9,7 +9,7 @@
         android:name=".core.application.PhotoGalleryApplication"
         android:theme="@style/Theme.PhotoGallery">
         <activity
-            android:name=".MainActivity"
+            android:name=".app.activity.photogallery.PhotoGalleryActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

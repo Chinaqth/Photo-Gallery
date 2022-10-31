@@ -9,12 +9,12 @@ import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.fk.photogallery.core.fragment.CoreFkFragment;
+import com.fk.photogallery.core.fragment.CoreFragment;
 import com.fk.photogallery.core.model.dao.CoreBean;
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;
 
 
-public abstract class BaseFkFragment extends CoreFkFragment {
+public abstract class BaseFragment extends CoreFragment {
     protected SmartRefreshLayout smartRefreshLayout;
     protected View rootView;
 

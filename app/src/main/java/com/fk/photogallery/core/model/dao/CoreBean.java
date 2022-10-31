@@ -10,6 +10,7 @@ public class CoreBean {
     private boolean isPullRefresh = false;
     private int current_page;
     private int total_page;
+    private List<PhotoItem> hits;
 
     public int getTotal() {
         return total;
@@ -52,5 +53,25 @@ public class CoreBean {
             return true;
         }
         return false;
+    }
+
+    public List<PhotoItem> getHits() {
+        return hits;
+    }
+
+    public void setHits(List<PhotoItem> hits) {
+        this.hits = hits;
+    }
+
+    @Override
+    public String toString() {
+        return "CoreBean{" +
+                "total=" + total +
+                ", totalHits=" + totalHits +
+                ", isPullRefresh=" + isPullRefresh +
+                ", current_page=" + current_page +
+                ", total_page=" + total_page +
+                ", hits=" + hits +
+                '}';
     }
 }

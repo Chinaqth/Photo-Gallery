@@ -3,14 +3,14 @@ package com.fk.photogallery.base.model;
 
 import android.content.Context;
 
-import com.fk.photogallery.core.activity.CoreFkActivity;
+import com.fk.photogallery.core.activity.CoreActivity;
 import com.fk.photogallery.core.application.PhotoGalleryApplication;
 
 import java.lang.ref.SoftReference;
 
 public class RuntimeData {
 
-    private SoftReference<CoreFkActivity> currentActivity = null;
+    private SoftReference<CoreActivity> currentActivity = null;
 
     private static class InstanceHolder {
         private static RuntimeData instance = new RuntimeData();
@@ -27,15 +27,15 @@ public class RuntimeData {
     public RuntimeData() {
     }
 
-    public CoreFkActivity getCurrentActivity() {
+    public CoreActivity getCurrentActivity() {
         if (currentActivity != null) {
-            CoreFkActivity activity = currentActivity.get();
+            CoreActivity activity = currentActivity.get();
             return activity;
         }
         return null;
     }
 
-    public void setCurrentActivity(CoreFkActivity currentActivity) {
+    public void setCurrentActivity(CoreActivity currentActivity) {
         if (currentActivity != null) {
             this.currentActivity = new SoftReference<>(currentActivity);
         }

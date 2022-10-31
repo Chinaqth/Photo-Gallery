@@ -9,7 +9,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 
-public abstract class CoreFkFragment extends Fragment {
+public abstract class CoreFragment extends Fragment {
 
 
     @Override

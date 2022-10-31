@@ -9,11 +9,11 @@ import android.widget.EditText;
 
 import androidx.annotation.IdRes;
 
-import com.fk.photogallery.core.activity.CoreFkActivity;
+import com.fk.photogallery.core.activity.CoreActivity;
 import com.fk.photogallery.core.model.dao.CoreBean;
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;
 
-public abstract class BaseFkActivity extends CoreFkActivity  {
+public abstract class BaseActivity extends CoreActivity {
     protected SmartRefreshLayout smartRefreshLayout;
     protected void onCreateContent(Bundle savedInstanceState) {
         setContentView(setLayoutId());

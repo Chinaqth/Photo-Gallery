@@ -38,6 +38,7 @@ object HttpUtil {
             val body = response.body?.string()
             body?.let {
                 Log.d(TAG, JSONObject(it).toString(4))
+                Log.d("QQQ","parseObject${JSON.parseObject(it, clazz).toString()}")
                 callback?.dataCallBack(response.code, JSON.parseObject(it, clazz))
             }
         }

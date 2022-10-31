@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.fk.photogallery.base.model.RuntimeData;
 
 
-public abstract class CoreFkActivity extends AppCompatActivity {
+public abstract class CoreActivity extends AppCompatActivity {
 
 
     @Override
