@@ -7,7 +7,7 @@
         android:icon="@mipmap/ic_launcher_background"
         android:label="@string/app_name"
         android:name=".core.application.PhotoGalleryApplication"
-        android:theme="@style/Theme.PhotoGallery">
+        android:theme="@style/FullStyle">
         <activity
             android:name=".app.activity.photogallery.PhotoGalleryActivity"
             android:exported="true">

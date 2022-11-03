@@ -2,13 +2,19 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="4dp">
 
-    <ImageView
+    <com.ansen.shape.AnsenImageView
         android:id="@+id/iv_image"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="250dp"
         android:src="@mipmap/icon_load_fail"
-        android:scaleType="centerCrop" />
+        app:corners_radius="10dp"/>
 
+    <com.ansen.shape.AnsenView
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        app:solid_color="#66000000"
+        app:corners_radius="10dp"/>
 </RelativeLayout>

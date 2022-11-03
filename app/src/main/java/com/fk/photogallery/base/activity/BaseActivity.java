@@ -1,9 +1,11 @@
 package com.fk.photogallery.base.activity;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
@@ -16,6 +18,9 @@ import com.scwang.smart.refresh.layout.SmartRefreshLayout;
 public abstract class BaseActivity extends CoreActivity {
     protected SmartRefreshLayout smartRefreshLayout;
     protected void onCreateContent(Bundle savedInstanceState) {
+        this.getWindow().setStatusBarColor(Color.TRANSPARENT);
+        Window window = this.getWindow();
+        window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         setContentView(setLayoutId());
     }
 

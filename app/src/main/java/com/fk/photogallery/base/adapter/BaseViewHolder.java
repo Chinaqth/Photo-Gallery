@@ -111,7 +111,7 @@ public class BaseViewHolder extends RecyclerView.ViewHolder {
         ImageView view = getView(viewId);
         if (view != null) {
             if (glideUtil != null) {
-                glideUtil.disPlayWithUrl(view, url, defaultImage);
+                glideUtil.disPlayWithUrl(view, url, defaultImage,true);
             }
         }
     }

@@ -16,7 +16,7 @@ class GalleryViewModel : ViewModel() {
 
     fun fetchData() {
         HttpUtil.get(
-            CoreBean::class.java,"https://pixabay.com/api/?key=30818692-f884b930db1e529bdb3eadd40&q=yellow+flowers&image_type=photo",
+            CoreBean::class.java,"https://pixabay.com/api/?key=30818692-f884b930db1e529bdb3eadd40&image_type=photo",
             requestDataCallBack)
     }
 

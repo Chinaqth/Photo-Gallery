@@ -2,16 +2,12 @@ package com.fk.photogallery.app.activity.photogallery;
 
 import androidx.lifecycle.ViewModelProvider;
 
-import com.bumptech.glide.Glide;
 import com.fk.photogallery.R;
 import com.fk.photogallery.base.activity.BaseActivity;
 import com.fk.photogallery.base.adapter.BaseQuickAdapter;
 import com.fk.photogallery.base.adapter.BaseViewHolder;
-import com.fk.photogallery.base.model.dao.GalleryItem;
 import com.fk.photogallery.base.model.dao.PhotoItem;
 import com.fk.photogallery.core.model.dao.CoreBean;
-
-import java.util.List;
 
 public class PhotoGalleryAdapter extends BaseQuickAdapter<BaseViewHolder> {
 
@@ -40,6 +36,9 @@ public class PhotoGalleryAdapter extends BaseQuickAdapter<BaseViewHolder> {
 
     @Override
     public int getItemCount() {
-        return 20;
+        if (galleryViewModel.getPhotoItem().getValue()!= null) {
+            return galleryViewModel.getPhotoItem().getValue().getHits().size();
+        }
+        return 0;
     }
 }
