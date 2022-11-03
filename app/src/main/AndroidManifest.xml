@@ -10,7 +10,9 @@
         android:theme="@style/FullStyle">
         <activity
             android:name=".app.activity.photogallery.PhotoGalleryActivity"
-            android:exported="true">
+            android:exported="true"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
