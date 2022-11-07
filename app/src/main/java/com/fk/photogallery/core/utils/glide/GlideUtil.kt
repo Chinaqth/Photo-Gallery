@@ -4,6 +4,7 @@ import android.content.Context
 import android.text.TextUtils
 import android.widget.ImageView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DecodeFormat
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.fk.photogallery.R
@@ -11,7 +12,10 @@ import com.fk.photogallery.base.model.RuntimeData
 
 object GlideUtil {
 
-    private val options = RequestOptions().error(R.mipmap.icon_load_fail)
+    private val options = RequestOptions()
+        .error(R.mipmap.icon_load_fail)
+        .format(DecodeFormat.PREFER_RGB_565)
+
     fun disPlayWithLocalData(imageView: ImageView, localImage: Int) {
         imageView.setImageResource(localImage)
     }

@@ -23,8 +23,11 @@ class GalleryViewModel : ViewModel() {
     private val requestDataCallBack = object : RequestDataCallBack<CoreBean> {
         override fun dataCallBack(status: Int, obj: CoreBean) {
             super.dataCallBack(status, obj)
-            Log.d("QQQ", "callback$obj")
             _photoItem.postValue(obj)
         }
+    }
+
+    fun getData() : CoreBean? {
+        return _photoItem.value
     }
 }

@@ -11,13 +11,7 @@ import com.fk.photogallery.core.model.dao.CoreBean;
 
 public class PhotoGalleryAdapter extends BaseQuickAdapter<BaseViewHolder> {
 
-    private final BaseActivity activity;
-    private final GalleryViewModel galleryViewModel;
-
-    public PhotoGalleryAdapter(BaseActivity activity) {
-        this.activity = activity;
-        galleryViewModel = new ViewModelProvider(activity).get(GalleryViewModel.class);
-    }
+    private CoreBean data;
 
     @Override
     protected int getItemLayoutId() {
@@ -26,18 +20,21 @@ public class PhotoGalleryAdapter extends BaseQuickAdapter<BaseViewHolder> {
 
     @Override
     protected void convert(BaseViewHolder holder, int position) {
-        CoreBean item = galleryViewModel.getPhotoItem().getValue();
-        if (item == null || item.getHits() == null) {
+        if (data == null || data.getHits() == null) {
             return;
         }
-        PhotoItem photoItems = item.getHits().get(position);
-        holder.displayWithUrl(R.id.iv_image, photoItems.getLargeImageURL(), R.mipmap.icon_placeholder);
+        PhotoItem photoItems = data.getHits().get(position);
+        holder.displayWithUrl(R.id.iv_image, photoItems.getLargeImageURL(), R.mipmap.icon_load_fail);
+    }
+
+    public void updateData(CoreBean data) {
+        this.data = data;
     }
 
     @Override
     public int getItemCount() {
-        if (galleryViewModel.getPhotoItem().getValue()!= null) {
-            return galleryViewModel.getPhotoItem().getValue().getHits().size();
+        if (data!= null) {
+            return data.getHits().size();
         }
         return 0;
     }
