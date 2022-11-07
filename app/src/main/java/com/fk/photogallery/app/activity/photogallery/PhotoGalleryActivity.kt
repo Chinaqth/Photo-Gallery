@@ -49,6 +49,7 @@ class PhotoGalleryActivity : BaseActivity(), OnRefreshLoadMoreListener {
 
         recyclerView.run {
             layoutManager = GridLayoutManager(this@PhotoGalleryActivity, 2)
+            setItemViewCacheSize(20)
             itemAnimator = null
             adapter = photoGalleryAdapter
 //            setItemViewCacheSize(20)
