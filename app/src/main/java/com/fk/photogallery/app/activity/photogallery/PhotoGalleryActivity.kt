@@ -18,6 +18,7 @@ import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
 import com.bumptech.glide.Glide
 import com.fk.photogallery.base.model.RuntimeData
+import com.fk.photogallery.core.utils.net.OnDataSuccessCallback
 
 
 class PhotoGalleryActivity : BaseActivity(), OnRefreshLoadMoreListener {
@@ -33,6 +34,11 @@ class PhotoGalleryActivity : BaseActivity(), OnRefreshLoadMoreListener {
         galleryViewModel = ViewModelProvider(this)[GalleryViewModel::class.java]
         smartRefreshLayout = findViewById(R.id.refreshLayout)
         recyclerView = findViewById(R.id.recyclerview)
+    }
+
+    override fun addViewAction() {
+        super.addViewAction()
+        smartRefreshLayout.setOnRefreshLoadMoreListener(this)
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -52,7 +58,6 @@ class PhotoGalleryActivity : BaseActivity(), OnRefreshLoadMoreListener {
             setItemViewCacheSize(20)
             itemAnimator = null
             adapter = photoGalleryAdapter
-//            setItemViewCacheSize(20)
             addOnScrollListener(mOnScrollListener)
         }
 
@@ -75,13 +80,8 @@ class PhotoGalleryActivity : BaseActivity(), OnRefreshLoadMoreListener {
     }
 
 
-    override fun addViewAction() {
-        super.addViewAction()
-
-    }
-
     override fun onRefresh(refreshLayout: RefreshLayout) {
-
+        galleryViewModel.fetchData()
     }
 
     override fun onLoadMore(refreshLayout: RefreshLayout) {

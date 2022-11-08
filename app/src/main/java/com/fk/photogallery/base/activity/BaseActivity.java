@@ -13,6 +13,8 @@ import androidx.annotation.IdRes;
 
 import com.fk.photogallery.core.activity.CoreActivity;
 import com.fk.photogallery.core.model.dao.CoreBean;
+import com.fk.photogallery.core.utils.net.HttpUtil;
+import com.fk.photogallery.core.utils.net.OnDataSuccessCallback;
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;
 
 public abstract class BaseActivity extends CoreActivity {
@@ -32,6 +34,18 @@ public abstract class BaseActivity extends CoreActivity {
         }
     }
 
+    @Override
+    protected void onAfterCreated(Bundle savedInstanceState) {
+        super.onAfterCreated(savedInstanceState);
+        HttpUtil.INSTANCE.setCallback(new OnDataSuccessCallback() {
+            @Override
+            public void onDataSuccess() {
+                if (smartRefreshLayout != null) {
+                    smartRefreshLayout.finishRefresh(200);
+                }
+            }
+        });
+    }
 
     public void requestDataFinish(CoreBean obj) {
         if (smartRefreshLayout != null) {
@@ -74,4 +88,10 @@ public abstract class BaseActivity extends CoreActivity {
     }
 
     protected abstract int setLayoutId();
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        HttpUtil.INSTANCE.setCallback(null);
+    }
 }

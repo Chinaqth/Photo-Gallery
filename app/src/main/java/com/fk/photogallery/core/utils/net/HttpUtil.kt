@@ -10,6 +10,11 @@ import java.util.concurrent.TimeUnit
 object HttpUtil {
     private const val TAG: String = "HttpUtil"
     private var okHttpClient: OkHttpClient? = null
+    private var onDataSuccessCallback: OnDataSuccessCallback? = null
+
+    fun setCallback(callback: OnDataSuccessCallback?) {
+        this.onDataSuccessCallback = callback
+    }
 
     init {
         okHttpClient = OkHttpClient.Builder()
@@ -38,11 +43,11 @@ object HttpUtil {
             val body = response.body?.string()
             body?.let {
                 Log.d(TAG, JSONObject(it).toString(4))
-                Log.d("QQQ","parseObject${JSON.parseObject(it, clazz).toString()}")
+                Log.d("HttpUtil", "parseObject${JSON.parseObject(it, clazz).toString()}")
+                onDataSuccessCallback?.onDataSuccess()
                 callback?.dataCallBack(response.code, JSON.parseObject(it, clazz))
             }
         }
-
     }
 
 
