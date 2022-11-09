@@ -29,11 +29,11 @@ object HttpUtil {
             .get()
             .url(url)
             .build()
+        Log.d(TAG, url)
         okHttpClient?.newCall(request)?.enqueue(OkhttpCallBack(clazz, callBack))
     }
 
-    class OkhttpCallBack<T>(private val clazz: Class<T>, var callback: RequestDataCallBack<T>?) :
-        Callback {
+    class OkhttpCallBack<T>(private val clazz: Class<T>, var callback: RequestDataCallBack<T>?) : Callback {
 
         override fun onFailure(call: Call, e: IOException) {
             Log.d(TAG, e.toString())
@@ -43,7 +43,6 @@ object HttpUtil {
             val body = response.body?.string()
             body?.let {
                 Log.d(TAG, JSONObject(it).toString(4))
-                Log.d("HttpUtil", "parseObject${JSON.parseObject(it, clazz).toString()}")
                 onDataSuccessCallback?.onDataSuccess()
                 callback?.dataCallBack(response.code, JSON.parseObject(it, clazz))
             }

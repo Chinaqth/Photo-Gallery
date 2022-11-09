@@ -10,6 +10,7 @@ public class CoreBean {
     private boolean isPullRefresh = false;
     private int current_page;
     private int total_page;
+    private int page;
     private List<PhotoItem> hits;
 
     public int getTotal() {
@@ -46,6 +47,14 @@ public class CoreBean {
 
     public void setTotal_page(int total_page) {
         this.total_page = total_page;
+    }
+
+    public int getPage() {
+        return page;
+    }
+
+    public void setPage(int page) {
+        this.page = page;
     }
 
     public boolean isLastPage() {

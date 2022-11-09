@@ -3,22 +3,17 @@ package com.fk.photogallery.app.activity.photogallery
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.*
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.fk.photogallery.R
 import com.fk.photogallery.base.activity.BaseActivity
-import com.fk.photogallery.base.model.dao.GalleryItem
-import com.fk.photogallery.core.model.dao.CoreBean
-import com.fk.photogallery.core.utils.net.HttpUtil
-import com.fk.photogallery.core.utils.net.RequestDataCallBack
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
 import com.bumptech.glide.Glide
 import com.fk.photogallery.base.model.RuntimeData
-import com.fk.photogallery.core.utils.net.OnDataSuccessCallback
 
 
 class PhotoGalleryActivity : BaseActivity(), OnRefreshLoadMoreListener {
@@ -45,8 +40,15 @@ class PhotoGalleryActivity : BaseActivity(), OnRefreshLoadMoreListener {
     override fun onAfterCreated(savedInstanceState: Bundle?) {
         super.onAfterCreated(savedInstanceState)
         photoGalleryAdapter = PhotoGalleryAdapter()
-        galleryViewModel.fetchData()
+        galleryViewModel.getFirst()
         galleryViewModel.photoItem.observe(this, {
+            smartRefreshLayout.apply {
+                if (isRefreshing)  {
+                    finishRefresh(300)
+                } else if (isLoading) {
+                    finishLoadMore(500)
+                }
+            }
             photoGalleryAdapter.run {
                 updateData(it)
                 notifyDataSetChanged()
@@ -54,8 +56,7 @@ class PhotoGalleryActivity : BaseActivity(), OnRefreshLoadMoreListener {
         })
 
         recyclerView.run {
-            layoutManager = GridLayoutManager(this@PhotoGalleryActivity, 2)
-            setItemViewCacheSize(20)
+            layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
             itemAnimator = null
             adapter = photoGalleryAdapter
             addOnScrollListener(mOnScrollListener)
@@ -67,9 +68,9 @@ class PhotoGalleryActivity : BaseActivity(), OnRefreshLoadMoreListener {
         override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
             super.onScrollStateChanged(recyclerView, newState)
             when (newState) {
-                SCROLL_STATE_IDLE -> Glide.with(RuntimeData.getInstance().context).resumeRequests()
-                SCROLL_STATE_DRAGGING, SCROLL_STATE_SETTLING -> Glide.with(RuntimeData.getInstance().context)
-                    .pauseRequests()
+//                SCROLL_STATE_IDLE -> Glide.with(RuntimeData.getInstance().context).resumeRequests()
+//                SCROLL_STATE_DRAGGING, SCROLL_STATE_SETTLING -> Glide.with(RuntimeData.getInstance().context)
+//                    .pauseRequests()
             }
         }
 
@@ -81,9 +82,10 @@ class PhotoGalleryActivity : BaseActivity(), OnRefreshLoadMoreListener {
 
 
     override fun onRefresh(refreshLayout: RefreshLayout) {
-        galleryViewModel.fetchData()
+        galleryViewModel.getFirst()
     }
 
     override fun onLoadMore(refreshLayout: RefreshLayout) {
+        galleryViewModel.getNext()
     }
 }

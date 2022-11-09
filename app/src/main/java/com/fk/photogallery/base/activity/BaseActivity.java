@@ -41,7 +41,7 @@ public abstract class BaseActivity extends CoreActivity {
             @Override
             public void onDataSuccess() {
                 if (smartRefreshLayout != null) {
-                    smartRefreshLayout.finishRefresh(200);
+//                    smartRefreshLayout.finishRefresh(200);
                 }
             }
         });
