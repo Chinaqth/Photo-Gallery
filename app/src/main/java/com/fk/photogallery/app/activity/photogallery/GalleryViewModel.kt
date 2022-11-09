@@ -20,12 +20,12 @@ class GalleryViewModel : ViewModel() {
 
     fun getFirst() {
         hit.clear()
+        coreBean.page = 0
         UserRepository().getPhotoItem(coreBean,requestDataCallBack)
     }
 
     fun getNext() {
         UserRepository().getPhotoItem(coreBean,requestDataCallBack)
-
     }
 
     private val requestDataCallBack = object : RequestDataCallBack<CoreBean> {
@@ -42,10 +42,4 @@ class GalleryViewModel : ViewModel() {
         }
     }
 
-//    fun fetchData() {
-//        HttpUtil.get(
-//            CoreBean::class.java,"https://pixabay.com/api/?key=30818692-f884b930db1e529bdb3eadd40&page=1&image_type=photo",
-//            requestDataCallBack)
-//    }
-//
 }

@@ -7,10 +7,7 @@ import com.fk.photogallery.core.utils.net.HttpUtil
 import com.fk.photogallery.core.utils.net.RequestDataCallBack
 
 class UserRepository : IUserRepository {
-    override fun getPhotoItem(
-        coreBean: CoreBean,
-        requestDataCallBack: RequestDataCallBack<CoreBean>
-    ) {
+    override fun getPhotoItem(coreBean: CoreBean, requestDataCallBack: RequestDataCallBack<CoreBean>) {
         var requestUrl = "${BaseConst.API}?${BaseConst.API_KEY}"
         var page = 1
         if (coreBean.hits != null) {

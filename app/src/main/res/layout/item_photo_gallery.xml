@@ -8,8 +8,9 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:cardCornerRadius="10dp">
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="10dp"
+        android:backgroundTint="@color/white" >
 
         <ImageView
             android:id="@+id/iv_image"
