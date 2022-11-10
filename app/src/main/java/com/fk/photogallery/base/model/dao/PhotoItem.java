@@ -5,6 +5,9 @@ public class PhotoItem {
     private String previewURL;
     private String largeImageURL;
     private String webformatURL;
+    private String user;
+    private String userImageURL;
+    private String tags;
     private int likes;
     private int comments;
     private int imageHeight;
@@ -72,6 +75,30 @@ public class PhotoItem {
 
     public void setWebformatHeight(int webformatHeight) {
         this.webformatHeight = webformatHeight;
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    public String getUserImageURL() {
+        return userImageURL;
+    }
+
+    public void setUserImageURL(String userImageURL) {
+        this.userImageURL = userImageURL;
+    }
+
+    public String getTags() {
+        return tags;
+    }
+
+    public void setTags(String tags) {
+        this.tags = tags;
     }
 
     @Override

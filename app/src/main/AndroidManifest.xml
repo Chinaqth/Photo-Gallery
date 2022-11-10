@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.fk.photogallery">
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
+        android:name=".core.application.PhotoGalleryApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher_background"
         android:label="@string/app_name"
-        android:name=".core.application.PhotoGalleryApplication"
         android:theme="@style/FullStyle">
         <activity
-            android:name=".app.activity.photogallery.PhotoGalleryActivity"
-            android:exported="true"
+            android:name=".app.activity.main.MainActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
+            android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

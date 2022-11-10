@@ -1,4 +1,4 @@
-package com.fk.photogallery.app.activity.photogallery;
+package com.fk.photogallery.app.activity.main.home.recommend;
 
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +15,7 @@ import com.fk.photogallery.core.model.dao.CoreBean;
 
 import java.util.List;
 
-public class PhotoGalleryAdapter extends BaseQuickAdapter<BaseViewHolder> {
+public class RecommendAdapter extends BaseQuickAdapter<BaseViewHolder> {
 
     private List<PhotoItem> data;
 
@@ -32,9 +32,14 @@ public class PhotoGalleryAdapter extends BaseQuickAdapter<BaseViewHolder> {
         PhotoItem photoItems = data.get(position);
         ImageView ivImage = holder.getView(R.id.iv_image);
         ViewGroup.LayoutParams layoutParams = ivImage.getLayoutParams();
-        layoutParams.height = photoItems.getWebformatHeight();
+        layoutParams.height = photoItems.getWebformatHeight() + 200;
         ivImage.setLayoutParams(layoutParams);
-        holder.displayWithUrl(R.id.iv_image, photoItems.getWebformatURL(), R.mipmap.icon_load_fail);
+        holder.displayWithUrl(R.id.iv_image, photoItems.getWebformatURL(), -1);
+
+        holder.setText(R.id.tv_theme,photoItems.getTags());
+        holder.displayWithUrl(R.id.iv_uer_avatar,photoItems.getUserImageURL(),R.mipmap.icon_placeholder);
+        holder.setText(R.id.tv_nickname,photoItems.getUser());
+        holder.setText(R.id.tv_like,"" + photoItems.getLikes());
     }
 
     public void updateData(List<PhotoItem> data) {
