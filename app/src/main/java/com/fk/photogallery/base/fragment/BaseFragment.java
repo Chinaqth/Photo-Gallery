@@ -1,6 +1,7 @@
 package com.fk.photogallery.base.fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +18,14 @@ import com.scwang.smart.refresh.layout.SmartRefreshLayout;
 public abstract class BaseFragment extends CoreFragment {
     protected SmartRefreshLayout smartRefreshLayout;
     protected View rootView;
-
+    private boolean isCreated = false;
+    private boolean isFirst = true;
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        isCreated = true;
+        onFragmentIsReady(getUserVisibleHint());
+    }
 
     @Override
     protected void onCreateContent(Bundle savedInstanceState) {
@@ -55,6 +63,45 @@ public abstract class BaseFragment extends CoreFragment {
         }
     }
 
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        onFragmentIsReady(!hidden);
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        onFragmentIsReady(getUserVisibleHint());
+    }
+
+    /***
+     * 当fragment可见状态改变时调用
+     * @param visible 当前fragmnet 是否可见
+     */
+    protected void onFragmentIsReady(boolean visible) {
+        if (!isCreated) {
+            return;
+        }
+        //第一次加载
+        if (isFirst && visible) {
+            Log.d("BaseFragment",this.getClass().getName() + ", onFirstLoad :");
+            onFirstLoad();
+            isFirst = false;
+        } else if (!isFirst){
+            Log.d("BaseFragment",this.getClass().getName() + ", visible :" + visible);
+            onFragmentVisibleChange(visible);
+        }
+    }
+
+    protected void onFirstLoad() {
+
+    }
+
+    protected void onFragmentVisibleChange(boolean visible) {
+
+    }
+
     public void requestDataFinish(CoreBean obj) {
         if (smartRefreshLayout != null) {
             if (obj.isPullRefresh()) {
@@ -69,4 +116,9 @@ public abstract class BaseFragment extends CoreFragment {
         }
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        isCreated = false;
+    }
 }

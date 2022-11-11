@@ -33,7 +33,7 @@ class HomeFragment : BaseFragment() {
         collapsingToolbar = findViewById(R.id.collapsing_toolbar)
         adapter = BaseViewPagerAdapter(parentFragmentManager)
         adapter.addFragment(
-            RecommendFragment(TabMenu("${BaseConst.API}?${BaseConst.API_KEY}&q=颜色")),
+            RecommendFragment(TabMenu("${BaseConst.API}?${BaseConst.API_KEY}&q=风景")),
             "推荐"
         )
         adapter.addFragment(

@@ -14,8 +14,7 @@
         android:layout_height="wrap_content"
         app:solid_color="@color/body_color"
         android:scaleType="centerCrop"
-        app:corners_radius="5dp"
-        android:src="@mipmap/icon_load_fail" />
+        app:corners_radius="5dp" />
 
     <TextView
         android:id="@+id/tv_theme"

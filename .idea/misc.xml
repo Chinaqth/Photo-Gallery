@@ -4,12 +4,13 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/layout/activity_gallery.xml" value="0.15942028985507245" />
+        <entry key="app/src/main/res/layout/activity_gallery_detail.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.34270833333333334" />
         <entry key="app/src/main/res/layout/activity_main2.xml" value="0.45" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.335" />
         <entry key="app/src/main/res/layout/fragment_my.xml" value="0.34270833333333334" />
         <entry key="app/src/main/res/layout/fragment_recommend.xml" value="0.34270833333333334" />
-        <entry key="app/src/main/res/layout/item_photo_gallery.xml" value="1.4388185654008439" />
+        <entry key="app/src/main/res/layout/item_photo_gallery.xml" value="0.45" />
         <entry key="app/src/main/res/layout/layout_smart_refresh.xml" value="0.34270833333333334" />
         <entry key="gallery/src/main/res/layout/activity_main2.xml" value="0.34270833333333334" />
         <entry key="gallery/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.20416666666666666" />

@@ -2,55 +2,56 @@ package com.fk.photogallery.app.activity.main.home.recommend;
 
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
-import androidx.lifecycle.ViewModelProvider;
+import androidx.annotation.NonNull;
 
 import com.fk.photogallery.R;
-import com.fk.photogallery.base.activity.BaseActivity;
-import com.fk.photogallery.base.adapter.BaseQuickAdapter;
-import com.fk.photogallery.base.adapter.BaseViewHolder;
+import com.fk.photogallery.app.activity.detail.GalleryDetailActivity;
+import com.fk.photogallery.base.adapter.recyclerview.ZAdapter;
+import com.fk.photogallery.base.adapter.recyclerview.animation.AlphaInAnimation;
+import com.fk.photogallery.base.adapter.recyclerview.listener.OnItemChildClickListener;
+import com.fk.photogallery.base.adapter.recyclerview.listener.OnItemClickListener;
+import com.fk.photogallery.base.model.dao.IntentParma;
 import com.fk.photogallery.base.model.dao.PhotoItem;
-import com.fk.photogallery.core.model.dao.CoreBean;
 
-import java.util.List;
+import com.fk.photogallery.base.adapter.recyclerview.ZViewHolder;
+import com.fk.photogallery.base.utils.FunctionUtils;
 
-public class RecommendAdapter extends BaseQuickAdapter<BaseViewHolder> {
+public class RecommendAdapter extends ZAdapter<PhotoItem, ZViewHolder> {
 
-    private List<PhotoItem> data;
-
-    @Override
-    protected int getItemLayoutId() {
-        return R.layout.item_photo_gallery;
+    public RecommendAdapter() {
+        super(R.layout.item_photo_gallery);
+        setAdapterAnimation(new AlphaInAnimation());
+        setOnItemClickListener(onItemClickListener);
     }
 
     @Override
-    protected void convert(BaseViewHolder holder, int position) {
-        if (data == null || data.isEmpty()) {
+    protected void convert(@NonNull ZViewHolder holder, PhotoItem item) {
+        if (item == null) {
             return;
         }
-        PhotoItem photoItems = data.get(position);
         ImageView ivImage = holder.getView(R.id.iv_image);
         ViewGroup.LayoutParams layoutParams = ivImage.getLayoutParams();
-        layoutParams.height = photoItems.getWebformatHeight() + 200;
+        layoutParams.height = item.getWebformatHeight() + 200;
         ivImage.setLayoutParams(layoutParams);
-        holder.displayWithUrl(R.id.iv_image, photoItems.getWebformatURL(), -1);
+        ivImage.setAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.anim_recyclerview));
+        holder.displayWithUrl(R.id.iv_image, item.getWebformatURL(), -1);
 
-        holder.setText(R.id.tv_theme,photoItems.getTags());
-        holder.displayWithUrl(R.id.iv_uer_avatar,photoItems.getUserImageURL(),R.mipmap.icon_placeholder);
-        holder.setText(R.id.tv_nickname,photoItems.getUser());
-        holder.setText(R.id.tv_like,"" + photoItems.getLikes());
+        holder.setText(R.id.tv_theme, item.getTags());
+        holder.displayWithUrl(R.id.iv_uer_avatar, item.getUserImageURL(), R.mipmap.icon_placeholder);
+        holder.setText(R.id.tv_nickname, item.getUser());
+        holder.setText(R.id.tv_like, "" + item.getLikes());
     }
 
-    public void updateData(List<PhotoItem> data) {
-        this.data = data;
-    }
-
-    @Override
-    public int getItemCount() {
-        if (data!= null) {
-            return data.size();
+    OnItemClickListener onItemClickListener = new OnItemClickListener() {
+        @Override
+        public void onItemClick(@NonNull ZAdapter<?, ?> adapter, @NonNull View view, int position) {
+            PhotoItem item = (PhotoItem) adapter.getItem(position);
+            IntentParma intentParma = new IntentParma();
+            intentParma.setPhotoItem(item);
+            FunctionUtils.INSTANCE.goTo(GalleryDetailActivity.class, intentParma, false);
         }
-        return 0;
-    }
+    };
 }

@@ -1,6 +1,8 @@
 package com.fk.photogallery.base.model.dao;
 
-public class PhotoItem {
+import java.io.Serializable;
+
+public class PhotoItem implements Serializable {
     private int id;
     private String previewURL;
     private String largeImageURL;
