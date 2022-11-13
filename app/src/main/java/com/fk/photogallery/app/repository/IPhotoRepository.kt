@@ -4,10 +4,12 @@ import com.fk.photogallery.base.model.dao.TabMenu
 import com.fk.photogallery.core.model.dao.CoreBean
 import com.fk.photogallery.core.utils.net.RequestDataCallBack
 
-interface IUserRepository {
+interface IPhotoRepository {
     fun getPhotoItem(
         tabMenu: TabMenu,
         coreBean: CoreBean,
         requestDataCallBack: RequestDataCallBack<CoreBean>
     )
+
+    fun getRecommendItem(coreBean: CoreBean,equestDataCallBack: RequestDataCallBack<CoreBean>)
 }

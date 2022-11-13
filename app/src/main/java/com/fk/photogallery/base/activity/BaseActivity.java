@@ -8,11 +8,14 @@ import android.view.View;
 import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.IdRes;
 
 import com.fk.photogallery.core.activity.CoreActivity;
 import com.fk.photogallery.core.model.dao.CoreBean;
+import com.fk.photogallery.core.utils.glide.GlideUtil;
 import com.fk.photogallery.core.utils.net.HttpUtil;
 import com.fk.photogallery.core.utils.net.OnDataSuccessCallback;
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;
@@ -31,6 +34,20 @@ public abstract class BaseActivity extends CoreActivity {
         View view = findViewById(resId);
         if (view != null) {
             view.setOnClickListener(onClickListener);
+        }
+    }
+
+    public void displayWithUrl(@IdRes int viewId, String url,int defaultImage){
+        ImageView view = findViewById(viewId);
+        if (view != null) {
+            GlideUtil.INSTANCE.disPlayWithUrl(view,url,defaultImage,true);
+        }
+    }
+
+    public void setText(@IdRes int viewId, String text) {
+        TextView view = findViewById(viewId);
+        if (view != null) {
+            view.setText(text);
         }
     }
 

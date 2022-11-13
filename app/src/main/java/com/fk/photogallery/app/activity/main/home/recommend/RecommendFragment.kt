@@ -54,9 +54,9 @@ class RecommendFragment constructor() : BaseFragment(), OnRefreshLoadMoreListene
             layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
             adapter = recommendAdapter
         }
-        galleryViewModel.photoItem.observe(this, {
+        galleryViewModel.photoItem.observe(this) {
             smartRefreshLayout.apply {
-                if (isRefreshing)  {
+                if (isRefreshing) {
                     recommendAdapter.setItems(it)
                     finishRefresh(300)
                 } else if (isLoading) {
@@ -64,7 +64,7 @@ class RecommendFragment constructor() : BaseFragment(), OnRefreshLoadMoreListene
                 }
             }
             recommendAdapter.addItems(it)
-        })
+        }
     }
 
 

@@ -1,40 +1,28 @@
-package com.fk.photogallery.app.activity.main.home.recommend
+package com.fk.photogallery.app.activity.detail
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.fk.photogallery.app.repository.impl.PhotoRepositoryImpl
 import com.fk.photogallery.base.model.dao.PhotoItem
-import com.fk.photogallery.base.model.dao.TabMenu
 import com.fk.photogallery.core.model.dao.CoreBean
 import com.fk.photogallery.core.utils.net.RequestDataCallBack
 
-class RecommendViewModel : ViewModel() {
+class DetailRecommendViewModel : ViewModel() {
     private val _photoItem = MutableLiveData<ArrayList<PhotoItem>>()
     val photoItem : LiveData<ArrayList<PhotoItem>>
     get() = _photoItem
     private var coreBean = CoreBean()
     private var hit = ArrayList<PhotoItem>()
-    var tabMenu : TabMenu? = null
-
-    fun initTab(tabMenu: TabMenu?) {
-        tabMenu?.let {
-            this.tabMenu = tabMenu
-        }
-    }
 
     fun getFirst() {
         hit.clear()
         coreBean.page = 0
-        tabMenu?.let {
-            PhotoRepositoryImpl().getPhotoItem(it,coreBean,requestDataCallBack)
-        }
+        PhotoRepositoryImpl().getRecommendItem(coreBean,requestDataCallBack)
     }
 
     fun getNext() {
-        tabMenu?.let {
-            PhotoRepositoryImpl().getPhotoItem(it,coreBean,requestDataCallBack)
-        }
+        PhotoRepositoryImpl().getRecommendItem(coreBean,requestDataCallBack)
     }
 
     private val requestDataCallBack = object : RequestDataCallBack<CoreBean> {
