@@ -10,11 +10,11 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.fk.photogallery.R
 import com.fk.photogallery.base.fragment.BaseFragment
 import com.fk.photogallery.base.model.dao.TabMenu
+import com.fk.photogallery.databinding.FragmentRecommendBinding
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
 
 class RecommendFragment constructor() : BaseFragment(), OnRefreshLoadMoreListener {
-
     override fun setLayoutId(): Int = R.layout.fragment_recommend
 
     private lateinit var recyclerView: RecyclerView
