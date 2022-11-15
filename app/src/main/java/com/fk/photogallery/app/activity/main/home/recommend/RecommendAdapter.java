@@ -1,5 +1,6 @@
 package com.fk.photogallery.app.activity.main.home.recommend;
 
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
@@ -9,14 +10,19 @@ import androidx.annotation.NonNull;
 
 import com.fk.photogallery.R;
 import com.fk.photogallery.app.activity.detail.PhotoDetailActivity;
+import com.fk.photogallery.app.dialog.PhotoDetailDialog;
 import com.fk.photogallery.base.adapter.recyclerview.ZAdapter;
 import com.fk.photogallery.base.adapter.recyclerview.animation.AlphaInAnimation;
 import com.fk.photogallery.base.adapter.recyclerview.listener.OnItemClickListener;
+import com.fk.photogallery.base.adapter.recyclerview.listener.OnItemLongClickListener;
 import com.fk.photogallery.base.model.dao.IntentParma;
 import com.fk.photogallery.base.model.dao.PhotoItem;
 
 import com.fk.photogallery.base.adapter.recyclerview.ZViewHolder;
 import com.fk.photogallery.base.utils.FunctionUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class RecommendAdapter extends ZAdapter<PhotoItem, ZViewHolder> {
 
@@ -24,6 +30,7 @@ public class RecommendAdapter extends ZAdapter<PhotoItem, ZViewHolder> {
         super(R.layout.item_photo_gallery);
         setAdapterAnimation(new AlphaInAnimation());
         setOnItemClickListener(onItemClickListener);
+        setOnItemLongClickListener(onItemLongClickListener);
     }
 
     @Override
@@ -51,6 +58,16 @@ public class RecommendAdapter extends ZAdapter<PhotoItem, ZViewHolder> {
             IntentParma intentParma = new IntentParma();
             intentParma.setPhotoItem(item);
             FunctionUtils.INSTANCE.goTo(PhotoDetailActivity.class, intentParma, false);
+        }
+    };
+
+    OnItemLongClickListener onItemLongClickListener = new OnItemLongClickListener() {
+        @Override
+        public boolean onItemLongClick(@NonNull ZAdapter<?, ?> adapter, @NonNull View view, int position) {
+            Log.d("QQQ","onItemLongClick");
+            PhotoDetailDialog photoDetailDialog = new PhotoDetailDialog(getContext(), (PhotoItem) adapter.getItem(position));
+            photoDetailDialog.show();
+            return true;
         }
     };
 }

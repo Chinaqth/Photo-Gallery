@@ -52,10 +52,6 @@ class PhotoDetailActivity : BaseActivity(){
             DetailRecommendFragment(TabMenu("${BaseConst.API}?${BaseConst.API_KEY}&q=${photoItem.tags}")),
             "推荐"
         )
-        adapter.addFragment(
-            DetailRecommendFragment(TabMenu("${BaseConst.API}?${BaseConst.API_KEY}&q=${photoItem.tags}")),
-            "热门"
-        )
         viewPager.adapter = adapter
         viewPager.offscreenPageLimit = 2
         slidingTabLayout.setViewPager(viewPager)

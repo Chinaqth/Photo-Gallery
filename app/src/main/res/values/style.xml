@@ -9,4 +9,41 @@
     <style name="FullStyle" parent="AppTheme">
         <item name="windowNoTitle">true</item>
     </style>
+
+    <style name="Animation_top_left">
+        <item name="android:windowEnterAnimation">@anim/open_top_left</item>
+        <item name="android:windowExitAnimation">@anim/close_top_left</item>
+    </style>
+
+    <style name="Animation_bottom_left">
+        <item name="android:windowEnterAnimation">@anim/open_bottom_left</item>
+        <item name="android:windowExitAnimation">@anim/close_bottom_left</item>
+    </style>
+
+    <style name="Animation_bottom_right">
+        <item name="android:windowEnterAnimation">@anim/open_bottom_right</item>
+        <item name="android:windowExitAnimation">@anim/close_bottom_right</item>
+    </style>
+
+    <style name="Animation_top_right">
+        <item name="android:windowEnterAnimation">@anim/open_top_right</item>
+        <item name="android:windowExitAnimation">@anim/close_top_right</item>
+    </style>
+
+    <style name="base_dialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
+
+
+    <style name="dialogWindowAnim" mce_bogus="1" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/dialog_enter_anim</item>
+        <item name="android:windowExitAnimation">@anim/dialog_exit_anim</item>
+    </style>
+
+
 </resources>
