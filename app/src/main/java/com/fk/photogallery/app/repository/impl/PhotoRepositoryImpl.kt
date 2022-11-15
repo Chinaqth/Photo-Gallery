@@ -24,12 +24,28 @@ class PhotoRepositoryImpl : IPhotoRepository {
         }
     }
 
-    override fun getRecommendItem(coreBean: CoreBean, requestDataCallBack: RequestDataCallBack<CoreBean>) {
+    override fun getRecommendItem(
+        coreBean: CoreBean,
+        requestDataCallBack: RequestDataCallBack<CoreBean>
+    ) {
         var page = 1
         if (coreBean.hits != null) {
             page = coreBean.page + 1
         }
         val requestUrl = "${BaseConst.API}?${BaseConst.API_KEY}&q=摄影&lang=zh&page=$page"
+        HttpUtil.get(CoreBean::class.java, requestUrl, requestDataCallBack)
+    }
+
+    override fun getPhotosBySearch(
+        coreBean: CoreBean,
+        keywords: String,
+        requestDataCallBack: RequestDataCallBack<CoreBean>
+    ) {
+        var page = 1
+        if (coreBean.hits != null) {
+            page = coreBean.page + 1
+        }
+        val requestUrl = "${BaseConst.API}?${BaseConst.API_KEY}&q=$keywords&lang=zh&page=$page"
         HttpUtil.get(CoreBean::class.java, requestUrl, requestDataCallBack)
     }
 }

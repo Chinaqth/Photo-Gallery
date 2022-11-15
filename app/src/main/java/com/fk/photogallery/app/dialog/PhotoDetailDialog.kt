@@ -1,13 +1,22 @@
 package com.fk.photogallery.app.dialog
 
 import android.content.Context
+import android.content.pm.PackageManager
+import android.os.Build
+import android.os.Build.VERSION.SDK
+import android.util.Log
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.ImageView
+import android.widget.LinearLayout
+import androidx.core.content.ContextCompat
+import androidx.core.view.drawToBitmap
 import com.fk.photogallery.R
 import com.fk.photogallery.base.dialog.BaseDialogK
 import com.fk.photogallery.base.model.dao.PhotoItem
+import com.fk.photogallery.base.utils.SaveUtil
 import com.fk.photogallery.base.utils.viewbinding.viewBinding
+import java.util.jar.Manifest
 
 
 class PhotoDetailDialog(context: Context, private var photoItem: PhotoItem) :
@@ -24,6 +33,9 @@ class PhotoDetailDialog(context: Context, private var photoItem: PhotoItem) :
 
     override fun initViewAction() {
         super.initViewAction()
+        findViewById<LinearLayout>(R.id.ll_download).setOnClickListener() {
+            SaveUtil.saveBitmap( ivImage.drawToBitmap())
+        }
     }
 
 }

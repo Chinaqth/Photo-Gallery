@@ -11,5 +11,12 @@ interface IPhotoRepository {
         requestDataCallBack: RequestDataCallBack<CoreBean>
     )
 
-    fun getRecommendItem(coreBean: CoreBean,equestDataCallBack: RequestDataCallBack<CoreBean>)
+    fun getRecommendItem(coreBean: CoreBean, requestDataCallBack: RequestDataCallBack<CoreBean>)
+
+
+    fun getPhotosBySearch(
+        coreBean: CoreBean,
+        keywords: String,
+        requestDataCallBack: RequestDataCallBack<CoreBean>
+    )
 }

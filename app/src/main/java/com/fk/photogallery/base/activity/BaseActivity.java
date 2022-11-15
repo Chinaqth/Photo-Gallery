@@ -44,6 +44,14 @@ public abstract class BaseActivity extends CoreActivity {
         }
     }
 
+    public void setVisibility(@IdRes int resId, int visible) {
+        View view = findViewById(resId);
+        if (view != null) {
+            view.setVisibility(visible);
+        }
+    }
+
+
     public void setText(@IdRes int viewId, String text) {
         TextView view = findViewById(viewId);
         if (view != null) {
