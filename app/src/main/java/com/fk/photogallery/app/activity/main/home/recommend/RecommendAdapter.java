@@ -8,10 +8,9 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 
 import com.fk.photogallery.R;
-import com.fk.photogallery.app.activity.detail.GalleryDetailActivity;
+import com.fk.photogallery.app.activity.detail.PhotoDetailActivity;
 import com.fk.photogallery.base.adapter.recyclerview.ZAdapter;
 import com.fk.photogallery.base.adapter.recyclerview.animation.AlphaInAnimation;
-import com.fk.photogallery.base.adapter.recyclerview.listener.OnItemChildClickListener;
 import com.fk.photogallery.base.adapter.recyclerview.listener.OnItemClickListener;
 import com.fk.photogallery.base.model.dao.IntentParma;
 import com.fk.photogallery.base.model.dao.PhotoItem;
@@ -51,7 +50,7 @@ public class RecommendAdapter extends ZAdapter<PhotoItem, ZViewHolder> {
             PhotoItem item = (PhotoItem) adapter.getItem(position);
             IntentParma intentParma = new IntentParma();
             intentParma.setPhotoItem(item);
-            FunctionUtils.INSTANCE.goTo(GalleryDetailActivity.class, intentParma, false);
+            FunctionUtils.INSTANCE.goTo(PhotoDetailActivity.class, intentParma, false);
         }
     };
 }

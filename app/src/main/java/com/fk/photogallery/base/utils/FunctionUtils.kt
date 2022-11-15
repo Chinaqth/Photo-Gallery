@@ -10,17 +10,19 @@ import com.fk.photogallery.base.model.dao.IntentParma
 object FunctionUtils {
     fun goTo(
         targetActivity: Class<out Activity>,
-        intentParma: IntentParma,
+        intentParma: IntentParma?,
         finishCurrent: Boolean
     ) {
         RuntimeData.getInstance().currentActivity?.let {
             val intent = Intent()
             intent.apply {
-               setClass(it,targetActivity)
-                if (action.isNullOrEmpty()){
+                setClass(it, targetActivity)
+                if (action.isNullOrEmpty()) {
                     action = "intent_put"
                 }
-                putExtra(action,intentParma)
+                intentParma?.let { parma ->
+                    putExtra(action, parma)
+                }
             }
             it.startActivity(intent)
 

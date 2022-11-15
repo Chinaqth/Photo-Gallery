@@ -20,5 +20,5 @@
     <color name="cancel_button_color">#999999</color>
     <color name="confirm_button_color">@color/mainColor</color>
     <color name="bili_color">#f955aa</color>
-    <color name="them_color">#58ADAE</color>
+    <color name="theme_color">#58ADAE</color>
 </resources>

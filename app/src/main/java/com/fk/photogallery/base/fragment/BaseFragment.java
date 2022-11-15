@@ -66,6 +66,7 @@ public abstract class BaseFragment extends CoreFragment {
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
+        Log.d("QQQ",this.getClass().getName() + ", onHiddenChanged :" + hidden);
         onFragmentIsReady(!hidden);
     }
 

@@ -1,13 +1,12 @@
-package com.fk.photogallery.app.activity.detail;
+package com.fk.photogallery.app.activity.detail.recommend;
 
-import android.view.View;
-import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 
 import com.fk.photogallery.R;
+import com.fk.photogallery.app.activity.detail.PhotoDetailActivity;
 import com.fk.photogallery.base.adapter.recyclerview.ZAdapter;
 import com.fk.photogallery.base.adapter.recyclerview.ZViewHolder;
 import com.fk.photogallery.base.adapter.recyclerview.animation.AlphaInAnimation;
@@ -43,6 +42,6 @@ public class DetailRecommendAdapter extends ZAdapter<PhotoItem, ZViewHolder> {
         PhotoItem item = (PhotoItem) adapter.getItem(position);
         IntentParma intentParma = new IntentParma();
         intentParma.setPhotoItem(item);
-        FunctionUtils.INSTANCE.goTo(GalleryDetailActivity.class, intentParma, false);
+        FunctionUtils.INSTANCE.goTo(PhotoDetailActivity.class, intentParma, false);
     };
 }

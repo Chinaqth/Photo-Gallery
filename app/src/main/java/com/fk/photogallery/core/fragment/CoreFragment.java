@@ -25,7 +25,7 @@ public abstract class CoreFragment extends Fragment {
     }
 
     protected void onCreateContent(Bundle savedInstanceState) {
-
+        Log.d("QQQ",this.getClass().getName() + ", onCreateContent ");
     }
 
     @Override

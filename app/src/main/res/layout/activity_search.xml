@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="@color/white_normal">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/rl_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="10dp">
+
+        <com.ansen.shape.AnsenImageView
+            android:id="@+id/iv_back"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="10dp"
+            android:src="@mipmap/icon_back_dark"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:corners_radius="30dp" />
+
+        <com.ansen.shape.AnsenRelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="3dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/iv_back"
+            app:layout_constraintEnd_toStartOf="@id/tv_search"
+            app:layout_goneMarginStart="10dp"
+            android:orientation="horizontal"
+            app:corners_radius="20dp"
+            app:solid_color="#F1F0F0">
+
+            <ImageView
+                android:id="@+id/iv_search"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="10dp"
+                android:src="@mipmap/icon_search" />
+
+            <EditText
+                android:id="@+id/et_search"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="20dp"
+                android:layout_toEndOf="@id/iv_search"
+                android:gravity="center_vertical"
+                android:hint="搜索关键字"
+                android:maxLines="1"
+                android:textColor="@color/title_color"
+                android:background="@null"
+                android:textSize="14sp"
+                android:textColorHint="#B8B8B8" />
+
+            <ImageView
+                android:id="@+id/iv_cancel"
+                android:layout_width="30dp"
+                android:layout_height="match_parent"
+                android:src="@mipmap/icon_cancel"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:padding="8dp"
+                android:layout_marginEnd="10dp"
+                android:visibility="gone"/>
+
+        </com.ansen.shape.AnsenRelativeLayout>
+
+        <com.ansen.shape.AnsenTextView
+            android:id="@+id/tv_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:paddingHorizontal="12dp"
+            app:text="搜索"
+            app:select_text="取消"
+            android:textColor="@color/other_color"
+            android:textSize="15dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <FrameLayout
+        android:id="@+id/fl_container"
+        android:layout_below="@id/rl_top"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</RelativeLayout>

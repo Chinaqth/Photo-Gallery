@@ -6,10 +6,12 @@ import android.view.View
 import androidx.viewpager.widget.ViewPager
 import com.fk.photogallery.R
 import com.fk.photogallery.app.activity.main.home.recommend.RecommendFragment
+import com.fk.photogallery.app.activity.search.SearchActivity
 import com.fk.photogallery.base.adapter.BaseViewPagerAdapter
 import com.fk.photogallery.base.constutil.BaseConst
 import com.fk.photogallery.base.fragment.BaseFragment
 import com.fk.photogallery.base.model.dao.TabMenu
+import com.fk.photogallery.base.utils.FunctionUtils
 import com.flyco.tablayout.SlidingTabLayout
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.appbar.AppBarLayout.OnOffsetChangedListener
@@ -64,7 +66,7 @@ class HomeFragment : BaseFragment() {
 
     private val onClickListener = View.OnClickListener { view ->
         if (view.id == R.id.rl_search) {
-
+            FunctionUtils.goTo(SearchActivity::class.java,null,false)
         } else if (view.id == R.id.iv_avatar) {
 
         }

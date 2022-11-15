@@ -23,7 +23,11 @@
         </activity>
 
         <activity
-            android:name=".app.activity.detail.GalleryDetailActivity"
+            android:name=".app.activity.detail.PhotoDetailActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".app.activity.search.SearchActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait" />
     </application>
