@@ -18,7 +18,6 @@ class SearchActivity : BaseActivity() {
     private lateinit var tvSearch: AnsenTextView
     private var historyFragment : HistoryFragment? = null
     private var resultFragment : ResultFragment? = null
-    private lateinit var switchTransaction : FragmentTransaction
 
     override fun setLayoutId(): Int = R.layout.activity_search
 
@@ -26,7 +25,7 @@ class SearchActivity : BaseActivity() {
         super.onCreateContent(savedInstanceState)
         editText = findViewById(R.id.et_search)
         tvSearch = findViewById(R.id.tv_search)
-        switchTransaction = supportFragmentManager.beginTransaction()
+        val switchTransaction = supportFragmentManager.beginTransaction()
         historyFragment = HistoryFragment()
         switchTransaction.add(R.id.fl_container, historyFragment!!)
         switchTransaction.commit()
@@ -83,18 +82,28 @@ class SearchActivity : BaseActivity() {
 
     private fun switchToResultFragment() {
         if (historyFragment?.isAdded == true && historyFragment?.isVisible == true) {
-            switchTransaction.hide(historyFragment!!)
+            val transaction = supportFragmentManager.beginTransaction()
+            transaction.hide(historyFragment!!)
             resultFragment = ResultFragment()
-            switchTransaction.add(R.id.fl_container,resultFragment!!)
-            switchTransaction.commit()
+            transaction.add(R.id.fl_container,resultFragment!!)
+            transaction.commit()
         }
     }
 
     private fun switchBack() {
-        switchTransaction.remove(resultFragment!!)
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.remove(resultFragment!!)
         if (historyFragment?.isHidden == true) {
-            switchTransaction.show(historyFragment!!)
-            switchTransaction.commit()
+            transaction.show(historyFragment!!)
+            transaction.commit()
+        }
+    }
+
+    override fun onBackPressed() {
+        if (historyFragment?.isHidden == true) {
+            switchBack()
+        } else{
+            finish()
         }
     }
 
