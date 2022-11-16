@@ -4,7 +4,8 @@
     android:id="@+id/person_tag_layout"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    app:solid_color="@color/white_normal">
+    app:solid_color="@color/white_normal"
+    android:padding="4dp">
 
     <com.ansen.shape.AnsenTextView
         android:id="@+id/tv_value"
@@ -12,8 +13,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="@string/text_empty"
-        app:text_color="#666666"
-        app:select_text_color="@color/white_normal"
+        app:text_color="@color/title_color"
         android:textSize="12sp"
         android:ellipsize="end"
         android:maxLines="1"
@@ -25,7 +25,7 @@
         android:paddingTop="9.5dp"
         android:paddingBottom="8.5dp"
         app:corners_radius="16dp"
-        app:stroke_color="#EAEAEA"
+        app:stroke_color="@color/body_color"
         app:stroke_width="@dimen/stroke_width"
         />
 

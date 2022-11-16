@@ -5,12 +5,10 @@ import android.os.Bundle
 import android.util.Log
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.SimpleItemAnimator
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.fk.photogallery.R
 import com.fk.photogallery.base.fragment.BaseFragment
 import com.fk.photogallery.base.model.dao.TabMenu
-import com.fk.photogallery.databinding.FragmentRecommendBinding
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
 

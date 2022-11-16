@@ -13,6 +13,7 @@
         android:layout_height="80dp"
         android:layout_centerVertical="true"
         android:layout_marginStart="10dp"
+        android:elevation="3dp"
         app:corners_radius="5dp"
         app:solid_color="@color/other_color" />
 
@@ -36,6 +37,7 @@
         android:layout_below="@id/tv_title"
         android:layout_alignStart="@id/tv_title"
         android:src="@mipmap/icon_default_avatar"
+        android:elevation="2dp"
         app:corners_radius="15dp"/>
 
     <TextView
@@ -57,7 +59,8 @@
         android:layout_height="15dp"
         android:layout_alignStart="@id/iv_avatar"
         android:layout_alignBottom="@id/iv_image"
-        android:src="@mipmap/icon_like" />
+        android:src="@mipmap/icon_like"
+        android:elevation="2dp"/>
 
     <TextView
         android:id="@+id/tv_like"

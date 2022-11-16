@@ -5,7 +5,9 @@ import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
 import android.view.View
+import android.view.inputmethod.EditorInfo
 import android.widget.EditText
+import android.widget.TextView.OnEditorActionListener
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.fragment.app.FragmentTransaction
@@ -13,6 +15,7 @@ import com.ansen.shape.AnsenTextView
 import com.fk.photogallery.R
 import com.fk.photogallery.app.activity.search.history.HistoryFragment
 import com.fk.photogallery.app.activity.search.result.ResultFragment
+import com.fk.photogallery.app.utils.HistoryManager
 import com.fk.photogallery.base.activity.BaseActivity
 
 class SearchActivity : BaseActivity() {
@@ -57,10 +60,17 @@ class SearchActivity : BaseActivity() {
                 }
             }
         })
-
+        editText.setOnEditorActionListener(editorActionListener)
         setViewOnClickListener(R.id.iv_back, onClickListener)
         setViewOnClickListener(R.id.iv_cancel, onClickListener)
         setViewOnClickListener(R.id.tv_search, onClickListener)
+    }
+
+    private val editorActionListener = OnEditorActionListener { v, actionId, event ->
+        if (actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_ACTION_SEARCH) {
+            search()
+        }
+        false
     }
 
     private val onClickListener = View.OnClickListener { view ->
@@ -73,22 +83,32 @@ class SearchActivity : BaseActivity() {
                     return@OnClickListener
                 } else {
                     switchBack()
-                    tvSearch.setSelected(false,true)
+                    tvSearch.setSelected(false, true)
                 }
             }
         } else if (view.id == R.id.tv_search) {
             if (tvSearch.isSelected) {
                 finish()
             } else {
-                if (editText.text.isEmpty()) {
-                    Toast.makeText(this, "请输入关键字", Toast.LENGTH_SHORT).show()
-                    return@OnClickListener
-                }
-                searchViewModel.keyword = editText.text.toString()
-                tvSearch.setSelected(true,true)
-                switchToResultFragment()
+                search()
             }
         }
+    }
+
+    private fun search() {
+        if (editText.text.isEmpty()) {
+            Toast.makeText(this, "请输入关键字", Toast.LENGTH_SHORT).show()
+            return
+        }
+        editText.text.toString().let {
+            searchViewModel.apply {
+                keyword = editText.text.toString()
+                HistoryManager.addHistory(it)
+            }
+        }
+
+        tvSearch.setSelected(true, true)
+        switchToResultFragment()
     }
 
     private fun switchToResultFragment() {
@@ -106,7 +126,7 @@ class SearchActivity : BaseActivity() {
         transaction.remove(resultFragment!!)
         if (historyFragment?.isHidden == true) {
             transaction.show(historyFragment!!)
-            transaction.commit()
+            transaction.commitAllowingStateLoss()
         }
     }
 

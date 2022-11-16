@@ -21,12 +21,13 @@ open class BaseFragmentK(@LayoutRes val layoutRes: Int) :Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(layoutRes,container,false)
+        return LayoutInflater.from(context).inflate(layoutRes,container,false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         onCreateContent(view, savedInstanceState)
+        onAfterCreated()
         onFragmentIsReady(userVisibleHint)
     }
 
@@ -41,7 +42,10 @@ open class BaseFragmentK(@LayoutRes val layoutRes: Int) :Fragment() {
     }
 
     protected open fun onCreateContent(view: View, savedInstanceState: Bundle?) {
+    }
 
+    protected open fun onAfterCreated() {
+        addViewAction()
     }
 
     /***
@@ -64,7 +68,6 @@ open class BaseFragmentK(@LayoutRes val layoutRes: Int) :Fragment() {
     }
 
     protected open fun onFirstLoad() {
-        addViewAction()
     }
 
     protected open fun onFragmentVisibleChange(visible: Boolean) {}

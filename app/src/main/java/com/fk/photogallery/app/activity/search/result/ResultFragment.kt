@@ -1,12 +1,13 @@
 package com.fk.photogallery.app.activity.search.result
 
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.fk.photogallery.R
 import com.fk.photogallery.app.activity.search.SearchViewModel
@@ -16,14 +17,16 @@ import com.fk.photogallery.databinding.FragmnetResultBinding
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.listener.OnLoadMoreListener
 
-class ResultFragment : BaseFragmentK(R.layout.fragmnet_result) , OnLoadMoreListener{
+class ResultFragment : BaseFragmentK(R.layout.fragmnet_result), OnLoadMoreListener {
 
-    private val binding : FragmnetResultBinding by viewBinding()
-    private  val viewModel : SearchViewModel by activityViewModels()
+    // TODO    private val binding : FragmnetResultBinding by viewBinding()
+    private lateinit var binding: FragmnetResultBinding
+    private val viewModel: SearchViewModel by activityViewModels()
     private lateinit var resultAdapter: ResultAdapter
 
     override fun onCreateContent(view: View, savedInstanceState: Bundle?) {
         super.onCreateContent(view, savedInstanceState)
+        binding = FragmnetResultBinding.bind(requireView())
         resultAdapter = ResultAdapter()
     }
 
@@ -38,7 +41,7 @@ class ResultFragment : BaseFragmentK(R.layout.fragmnet_result) , OnLoadMoreListe
         activity?.let { activity ->
             viewModel.photoItem.observe(activity) {
                 binding.refreshLayout.apply {
-                     if (isLoading) {
+                    if (isLoading) {
                         finishLoadMore(500)
                     }
                 }
@@ -59,6 +62,7 @@ class ResultFragment : BaseFragmentK(R.layout.fragmnet_result) , OnLoadMoreListe
             it.fetchData(it.keyword)
         }
     }
+
 
 
 }

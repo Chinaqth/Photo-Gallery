@@ -4,15 +4,24 @@
     android:layout_height="match_parent"
     android:background="@color/white_normal">
 
-
     <TextView
-        android:id="@+id/tv_text"
+        android:id="@+id/tv_history"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="30sp"
+        android:text="搜索历史："
+        android:textStyle="bold"
+        android:textSize="13sp"
         android:textColor="@color/title_color"
-        android:text="history"
-        android:layout_centerInParent="true"/>
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_history"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="5dp"
+        android:layout_below="@id/tv_history"/>
 
 
 
