@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.ImageView
 import androidx.annotation.IdRes
+import com.fk.photogallery.R
 import com.fk.photogallery.core.utils.glide.GlideUtil
 import java.lang.Exception
 
@@ -28,7 +29,7 @@ abstract class BaseDialogK(
 
     private var isInitAttributes = false
     protected var mGravity: Int = Gravity.CENTER
-    protected var mWidth: Int = ViewGroup.LayoutParams.MATCH_PARENT
+    protected var mWidth: Int = ViewGroup.LayoutParams.WRAP_CONTENT
     protected var mHeight: Int = ViewGroup.LayoutParams.WRAP_CONTENT
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,6 +39,12 @@ abstract class BaseDialogK(
         initAttributes()
         if (!isInitAttributes) {
             throw Exception("禁止覆盖 initAttributes() --> super()方法!")
+        }
+
+        findViewById<View>(R.id.root)?.let {
+            it.setOnClickListener() {
+                dismiss()
+            }
         }
     }
 

@@ -6,6 +6,8 @@ import android.text.TextUtils
 import android.text.TextWatcher
 import android.view.View
 import android.widget.EditText
+import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.fragment.app.FragmentTransaction
 import com.ansen.shape.AnsenTextView
 import com.fk.photogallery.R
@@ -16,8 +18,10 @@ import com.fk.photogallery.base.activity.BaseActivity
 class SearchActivity : BaseActivity() {
     private lateinit var editText: EditText
     private lateinit var tvSearch: AnsenTextView
-    private var historyFragment : HistoryFragment? = null
-    private var resultFragment : ResultFragment? = null
+    private var historyFragment: HistoryFragment? = null
+    private var resultFragment: ResultFragment? = null
+
+    private val searchViewModel: SearchViewModel by viewModels()
 
     override fun setLayoutId(): Int = R.layout.activity_search
 
@@ -60,32 +64,39 @@ class SearchActivity : BaseActivity() {
     }
 
     private val onClickListener = View.OnClickListener { view ->
-            if (view.id == R.id.iv_back) {
-                finish()
-            } else if (view.id == R.id.iv_cancel) {
-                editText.setText("")
-                historyFragment?.let {
-                    if (it.isVisible) {
-                        return@OnClickListener
-                    } else{
-                        switchBack()
-                    }
-                }
-            } else if (view.id == R.id.tv_search) {
-                if (tvSearch.isSelected) {
-                    finish()
+        if (view.id == R.id.iv_back) {
+            finish()
+        } else if (view.id == R.id.iv_cancel) {
+            editText.setText("")
+            historyFragment?.let {
+                if (it.isVisible) {
+                    return@OnClickListener
                 } else {
-                    switchToResultFragment()
+                    switchBack()
+                    tvSearch.setSelected(false,true)
                 }
             }
+        } else if (view.id == R.id.tv_search) {
+            if (tvSearch.isSelected) {
+                finish()
+            } else {
+                if (editText.text.isEmpty()) {
+                    Toast.makeText(this, "请输入关键字", Toast.LENGTH_SHORT).show()
+                    return@OnClickListener
+                }
+                searchViewModel.keyword = editText.text.toString()
+                tvSearch.setSelected(true,true)
+                switchToResultFragment()
+            }
         }
+    }
 
     private fun switchToResultFragment() {
         if (historyFragment?.isAdded == true && historyFragment?.isVisible == true) {
             val transaction = supportFragmentManager.beginTransaction()
             transaction.hide(historyFragment!!)
             resultFragment = ResultFragment()
-            transaction.add(R.id.fl_container,resultFragment!!)
+            transaction.add(R.id.fl_container, resultFragment!!)
             transaction.commit()
         }
     }
@@ -102,7 +113,7 @@ class SearchActivity : BaseActivity() {
     override fun onBackPressed() {
         if (historyFragment?.isHidden == true) {
             switchBack()
-        } else{
+        } else {
             finish()
         }
     }
