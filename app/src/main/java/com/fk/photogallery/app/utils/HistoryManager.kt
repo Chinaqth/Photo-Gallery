@@ -7,6 +7,10 @@ import com.alibaba.fastjson.JSON
 import com.fk.photogallery.base.model.RuntimeData
 import java.util.ArrayList
 
+/**
+ *  ## HistoryManager管理搜索历史记录
+ * @see getHistories
+ */
 object HistoryManager {
     private var MAXSIZE = 10
     private var sp: SharedPreferences? = null
@@ -24,7 +28,7 @@ object HistoryManager {
             }
             it.add(history)
             val jsonString = JSON.toJSONString(it)
-            Log.d("HistoryManager",jsonString)
+            Log.d("HistoryManager", jsonString)
             edit?.let { sp ->
                 sp.putString("history", jsonString)
                 sp.commit()
@@ -33,6 +37,9 @@ object HistoryManager {
 
     }
 
+    /**
+     * 获取历史记录，如果没有则返回空集合
+     */
     fun getHistories(): ArrayList<String> {
         val jsonString = sp?.getString("history", "")
         Log.d("HistoryManager", jsonString.toString())
@@ -43,5 +50,22 @@ object HistoryManager {
         }
     }
 
+    private fun resetHistories(newData: String) {
+        edit?.let {
+            it.putString("history", newData)
+            it.commit()
+        }
+    }
+
+    fun clearHistories(): ArrayList<String> {
+        if (getHistories().isEmpty()) {
+            return ArrayList<String>()
+        }
+        getHistories().let {
+            it.clear()
+            resetHistories(JSON.toJSONString(it))
+        }
+        return getHistories()
+    }
 
 }

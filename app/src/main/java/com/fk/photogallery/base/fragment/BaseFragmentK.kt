@@ -5,23 +5,29 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.IdRes
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 
-open class BaseFragmentK(@LayoutRes val layoutRes: Int) :Fragment() {
+open class BaseFragmentK(@LayoutRes val layoutRes: Int) : Fragment() {
     var smartRefreshLayout: SmartRefreshLayout? = null
     private var isCreated = false
     private var isFirst = true
-
+    private var rootView: View? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         isCreated = true
 
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return LayoutInflater.from(context).inflate(layoutRes,container,false)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        rootView = LayoutInflater.from(context).inflate(layoutRes, container, false)
+        return rootView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -76,6 +82,11 @@ open class BaseFragmentK(@LayoutRes val layoutRes: Int) :Fragment() {
         smartRefreshLayout?.apply {
             autoRefresh(500)
         }
+    }
+
+    //用的时候需要判空，可能空指针
+    protected open fun <T : View?> findViewById(@IdRes resId: Int): T? {
+        return rootView?.findViewById(resId)
     }
 
     protected open fun addViewAction() {

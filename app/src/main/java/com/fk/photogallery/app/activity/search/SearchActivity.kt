@@ -64,6 +64,7 @@ class SearchActivity : BaseActivity() {
         setViewOnClickListener(R.id.iv_back, onClickListener)
         setViewOnClickListener(R.id.iv_cancel, onClickListener)
         setViewOnClickListener(R.id.tv_search, onClickListener)
+        setViewOnClickListener(R.id.tv_clear_history, onClickListener)
     }
 
     private val editorActionListener = OnEditorActionListener { v, actionId, event ->
@@ -83,15 +84,10 @@ class SearchActivity : BaseActivity() {
                     return@OnClickListener
                 } else {
                     switchBack()
-                    tvSearch.setSelected(false, true)
                 }
             }
         } else if (view.id == R.id.tv_search) {
-            if (tvSearch.isSelected) {
-                finish()
-            } else {
-                search()
-            }
+            search()
         }
     }
 
@@ -106,8 +102,6 @@ class SearchActivity : BaseActivity() {
                 HistoryManager.addHistory(it)
             }
         }
-
-        tvSearch.setSelected(true, true)
         switchToResultFragment()
     }
 
@@ -115,15 +109,19 @@ class SearchActivity : BaseActivity() {
         if (historyFragment?.isAdded == true && historyFragment?.isVisible == true) {
             val transaction = supportFragmentManager.beginTransaction()
             transaction.hide(historyFragment!!)
-            resultFragment = ResultFragment()
-            transaction.add(R.id.fl_container, resultFragment!!)
-            transaction.commit()
+            if (resultFragment == null) {
+                resultFragment = ResultFragment()
+                transaction.add(R.id.fl_container, resultFragment!!)
+            } else {
+                transaction.show(resultFragment!!)
+            }
+            transaction.commitAllowingStateLoss()
         }
     }
 
     private fun switchBack() {
         val transaction = supportFragmentManager.beginTransaction()
-        transaction.remove(resultFragment!!)
+        transaction.hide(resultFragment!!)
         if (historyFragment?.isHidden == true) {
             transaction.show(historyFragment!!)
             transaction.commitAllowingStateLoss()

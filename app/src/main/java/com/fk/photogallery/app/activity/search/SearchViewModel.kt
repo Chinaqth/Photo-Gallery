@@ -13,9 +13,7 @@ class SearchViewModel : ViewModel() {
     private val _photoItem = MutableLiveData<ArrayList<PhotoItem>>()
     val photoItem: LiveData<ArrayList<PhotoItem>>
     get() = _photoItem
-
     var keyword : String = ""
-
     private var coreBean = CoreBean()
     private var hit = ArrayList<PhotoItem>()
 

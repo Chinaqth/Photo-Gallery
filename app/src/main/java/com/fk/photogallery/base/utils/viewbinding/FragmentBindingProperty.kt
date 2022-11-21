@@ -56,6 +56,7 @@ class FragmentBindingProperty<in F : Fragment, out VB : ViewBinding>(private val
 
     @MainThread
     fun clear() {
+        Log.d("FragmentBindingProperty","clear")
         viewBinding = null
     }
 
