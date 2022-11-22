@@ -9,6 +9,9 @@ import com.fk.photogallery.R
 import com.fk.photogallery.app.activity.main.home.HomeFragment
 import com.fk.photogallery.app.activity.main.my.MyFragment
 import com.fk.photogallery.base.activity.BaseActivity
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 
 class MainActivity : BaseActivity() {
     private var homeFragment: HomeFragment? = null
@@ -36,6 +39,21 @@ class MainActivity : BaseActivity() {
         homeFragment = HomeFragment()
         changeFragment(R.id.rl_home)
         supportFragmentManager.beginTransaction().add(R.id.main_container, homeFragment!!).commit()
+
+        val scope = MainScope()
+
+        val launch = scope.launch {
+
+
+        }
+
+
+        scope.launch {
+            launch.join()
+        }
+
+
+
     }
 
     override fun onAfterCreated(savedInstanceState: Bundle?) {
